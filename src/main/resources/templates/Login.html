@@ -1,0 +1,77 @@
+<!doctype html>
+<html th:replace="~{base::layout(~{::main})}">
+  <body>
+    <main>
+      <!-- Login Section -->
+      <div class="container-fluid d-flex align-items-center justify-content-center py-5" style="background: #f5f8ff; min-height: 100vh;">
+        
+        <div class="card shadow-lg border-0 rounded-4 p-5" style="max-width: 450px; width: 100%;">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color:#0051c3;">🔐 Login</h2>
+            <p class="text-muted">Welcome back! Please login to continue.</p>
+          </div>
+
+
+  <!-- Flash Alert Message -->
+  <div th:if="${msg}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <span th:text="${msg}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+
+
+          <!-- Login Form -->
+          <form method="post" action="/login">
+          
+           <!-- Role Selection -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Select Role</label>
+              <select name="role" class="form-select rounded-3" required>
+                <option value="">-- Select Role --</option>
+                <option value="ADMIN">Admin</option>
+                <option value="STUDENT">Student</option>
+              </select>
+            </div>
+            
+            <!-- User ID -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">User ID</label>
+              <input type="text" name="userid" class="form-control rounded-3" placeholder="Enter your User ID" required>
+            </div>
+
+            <!-- Password -->
+           <div class="mb-3">
+              <label class="form-label fw-semibold">Password</label>
+              <input type="password" name="password" class="form-control rounded-3" placeholder="Enter your password" required>
+            </div>
+
+           
+
+            <!-- Submit -->
+            <div class="text-center mt-4">
+              <button type="submit" 
+                      class="btn text-white px-5 py-2 fw-bold rounded-3 shadow"
+                      style="background: linear-gradient(45deg, #0051c3, #0f6a03); border:none; transition: all 0.3s ease;"
+                      onmouseover="this.style.opacity='0.9'" 
+                      onmouseout="this.style.opacity='1'">
+                Login
+              </button>
+            </div>
+          </form>
+
+          <!-- Forgot password (Outside Form) -->
+          <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+            <a href="/forgot-password" class="small text-decoration-none" style="color:#0051c3;">Forgot Password?</a>
+          </div>
+            
+        </div>
+
+      </div>
+      
+      
+    </main>
+
+    <!-- Bootstrap Icons (for optional use) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  </body>
+</html>
