@@ -34,6 +34,9 @@ public class MainController {
 	@Autowired
 	private UsersRepository userRepo;
 	
+	@Autowired
+	private HttpSession session;
+	
 	
 
 	
@@ -159,6 +162,14 @@ public class MainController {
 	 }
 	 
 	 
+	 
+
+	 
+	 @GetMapping("/logout")
+	 public String showLogout() {
+		 session.invalidate();
+		 return "redirect:/login";
+	 }
 	 
 
 	

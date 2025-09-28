@@ -7,17 +7,73 @@
                     <div class="card-header bg-primary">
                         <h4 class="text-center text-white m-0">Add New Students</h4>
                     </div>
+                    
                     <div class="card-body">
                         <form method="post">
                             <div class="row">
+                                <!-- Student Name -->
                                 <div class="col-sm-6 mt-3">
                                     <label class="fw-bold">Enter Student Name</label>
                                     <input type="text" name="name" class="form-control" 
                                            placeholder="Student Name..." required="required">
                                 </div>
+
+                                <!-- Contact Number -->
                                 <div class="col-sm-6 mt-3">
-                                	<label class="fw-bold">Enter Contact Number</label>
-                                	<input type="number" name="contactNo" class="form-control" placeholder="Enter Contact Number.." required="required">
+                                    <label class="fw-bold">Enter Contact Number</label>
+                                    <input type="number" name="contactNo" class="form-control" 
+                                           placeholder="Enter Contact Number.." required="required">
+                                </div>
+
+                                <!-- Email -->
+                                <div class="col-sm-6 mt-3">
+                                    <label class="fw-bold">Enter Email</label>
+                                    <input type="email" name="email" class="form-control" 
+                                           placeholder="Enter Email...." required="required">
+                                </div>
+
+                                <!-- Program Selection -->
+                                <div class="col-sm-6 mt-3">
+                                    <label class="fw-bold">Enter Preferred Course/Program</label>
+                                    <select name="program" class="form-control" required>
+                                        <option value="">--Select Course--</option>
+                                        <option value="B.Tech">B.Tech</option>
+                                        <option value="B.Pharm">B.Pharm</option>
+                                        <option value="D.Pharm">D.Pharm</option>
+                                        <option value="Diploma">Diploma</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 mt-3">
+                                	<label class="fw-bold">Select Branch</label>
+                                	<select class="form-control" name="branch" required>
+                                		<option value="">--Select Branch--</option>
+                                		<option value="Pharmaceutical Chemistry">Pharmaceutical Chemistry</option>
+                                		<option value="Pharmacology">Pharmacology</option>
+                                		<option value="Clinical Pharmacy">Clinical Pharmacy</option>
+                                		<option value="Industrial Pharmacy">Industrial Pharmacy</option>
+                                		<option value="Computer Science">Computer Science</option>
+                                		<option value="Data Science">Data Science</option>
+                                		<option value="Mechnical Engineer">Mechnical Engineer</option>
+                                		<option value="Electrical Enginner">Electrical Enginner</option>
+                                		
+                                	</select>
+                                </div>
+                                
+                                <div class="col-sm-6 mt-3">
+                                	<label class="fqw-bold">Select Year</label>
+                                	<select class="form-control" name="year" required>
+                                		<option value="">--Select Year--</option>
+                                		<option value="First Year">First Year</option>
+                                		<option value="Second Year">Second Year</option>
+                                		<option value="Third Year">Third Year</option>
+                                		<option value="Fourth Year">Fourth Year</option>	
+                                		
+                                	</select>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="col-sm-12 mt-4 text-center">
+                                    <button type="submit" class="btn btn-primary px-4">Add Student</button>
                                 </div>
                             </div>
                         </form>

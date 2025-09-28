@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{Admin/Adminbase::layout(~{::main})}">
+	<body>
+		<main th:fragment="main">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-header bg-primary">
+							<h4 class="text-center text-white m-0">Manage New Students</h4>
+						</div>
+
+						<div class="card-body">
+							<!-- Flash message -->
+							<div th:if="${msg}" class="alert alert-info text-center"
+							     th:text="${msg}"></div>
+
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped text-center">
+									<thead class="table-dark">
+										<tr>
+											<th>Sr.No</th>
+											<th>Enrollment No</th>
+											<th>Name</th>
+											<th>Gender</th>
+											<th>Father's Name</th>
+											<th>Mother's Name</th>
+											<th>Contact No</th>
+											<th>Email</th>
+											<th>Course</th>
+											<th>Branch</th>
+											<th>Year</th>
+											<th>Reg Date</th>
+											<th>Payment Receipt</th>
+											<th>UTR No.</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="student, srno : ${newStudents}">
+											<td th:text="${srno.index + 1 }">Sr.No.</td>
+											<td th:text="${student.rollNo}">Enrollment No</td>
+											<td th:text="${student.name}">Name</td>
+											<td th:text="${student.gender}">Gender</td>
+											<td th:text="${student.fatherName == null ? 'No Records' : student.fatherName}">Father's Name</td>
+											<td th:text="${student.motherName == null ? 'No Records' : student.motherName}">Mother's Name</td>
+											<td th:text="${student.contactNo}">Contact No</td>
+											<td th:text="${student.email}">Email</td>
+											<td th:text="${student.program}">Course</td>
+											<td th:text="${student.branch}">Branch</td>
+											<td th:text="${student.year}">Year</td>
+											<td th:text="${#temporals.format(student.regDate, 'dd-MM-yyyy HH:mm')}">Reg Date</td>
+											<td>
+												<a th:if="${student.paymentImage != null}"
+												   th:href="@{'/paymentSlip/' + ${student.paymentImage}}"
+												   th:text="${student.paymentImage}"></a>
+												<span th:if="${student.paymentImage == null}">No Records</span>
+											</td>
+											<td th:text="${student.utrNo == null ? 'No Records' : student.utrNo}">UTR No.</td>
+											<td>
+												<a th:href="@{ApproveStudent(id = ${student.id})}" onclick="return confirm('Are You sure want to approve?')" class="btn btn-warning btn-sm">Pending</a>
+												   
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
