@@ -1,7 +1,87 @@
-<html th:replace="~{Admin/Adminbase::layout(~{::main})}">
-    <body>
-        <main>
-            manageshudent
-        </main>
-    </body>
+<html th:replace="~{Admin/Adminbase::layout(~{::main})}" xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <main th:fragment="main">
+      <div class="container-fluid py-4">
+        <div class="card shadow-lg border-0 rounded-4">
+          
+          <!-- Card Header -->
+          <div class="card-header bg-gradient bg-primary text-white d-flex justify-content-between align-items-center rounded-top-4">
+            <h4 class="m-0"><i class="bi bi-people-fill me-2"></i> Manage Students</h4>
+            <a href="/Admin/AddStudent" class="btn btn-light btn-sm shadow-sm">
+              <i class="bi bi-person-plus"></i> Add New
+            </a>
+          </div>
+
+          <!-- Flash Message -->
+          <div class="p-3">
+            <div th:if="${msg}" class="alert alert-info alert-dismissible fade show text-center shadow-sm" role="alert">
+              <span th:text="${msg}"></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="px-3 pb-2 d-flex justify-content-end">
+            <input type="text" id="searchInput" class="form-control w-25 shadow-sm" placeholder="🔍 Search Student...">
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive px-3 pb-3">
+            <table class="table table-hover align-middle text-center shadow-sm">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Roll No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="studentTable">
+                <tr th:each="stu, iterStat : ${student}">
+                  <td th:text="${iterStat.index + 1}"></td>
+                  <td th:text="${stu.rollNo}"></td>
+                  <td th:text="${stu.name}"></td>
+                  <td th:text="${stu.email}"></td>
+                  <td>
+                    <span th:if="${stu.status.name() == 'APPROVED'}" class="badge bg-success px-3 py-2">Approved</span>
+                    <span th:if="${stu.status.name() == 'DISABLED'}" class="badge bg-danger px-3 py-2">Disabled</span>
+                  </td>
+                  <td>
+                    <a th:href="@{/Admin/EditStudent/{id}(id=${stu.id})}" class="btn btn-sm btn-warning me-1 shadow-sm">
+                      <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a th:href="@{/Admin/DeleteStudent/{id}(id=${stu.id})}" 
+                       class="btn btn-sm btn-danger shadow-sm"
+                       onclick="return confirm('Are you sure you want to delete this student?');">
+                      <i class="bi bi-trash3-fill"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(student)}">
+                  <td colspan="6" class="text-center text-muted py-3">
+                    <i class="bi bi-exclamation-circle"></i> No Students Found
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Search Filter Script -->
+      <script>
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+          let filter = this.value.toLowerCase();
+          let rows = document.querySelectorAll("#studentTable tr");
+          rows.forEach(row => {
+            let text = row.innerText.toLowerCase();
+            row.style.display = text.includes(filter) ? "" : "none";
+          });
+        });
+      </script>
+    </main>
+  </body>
 </html>

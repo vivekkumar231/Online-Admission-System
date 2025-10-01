@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myproject.OAS.Model.Enquiry;
@@ -107,6 +109,51 @@ public class AdminController {
 		
 		return "Admin/NewStudents";
 	}
+	
+	@GetMapping("/ApproveStudent")
+	public String approvedStudent(@RequestParam("id") long id, RedirectAttributes attr) {
+	    if (session.getAttribute("loggedInAdmin") == null) {
+	        return "redirect:/login";
+	    }
+	    try {
+	        Users student = userRepo.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid Student ID:" + id));
+
+	        student.setStatus(UserStatus.APPROVED);
+	        userRepo.save(student);
+
+	        attr.addFlashAttribute("msg", "Student " + student.getName() + " approved successfully and email sent.");
+	    } catch (Exception e) {
+	        attr.addFlashAttribute("msg", "Error approving student " + e.getMessage());
+	    }
+	    return "redirect:/Admin/ManageStudents";  // better to redirect back to student list
+	}
+	
+//	@GetMapping("/UploadMaterial")
+//	 public String uploadMaterial(HttpSession session) {
+//	     if (session.getAttribute("loggedInAdmin") == null) {
+//	         return "redirect:/login";  // Redirect if not logged in
+//	     }
+//	     return "Admin/UploadMaterial"; // Thymeleaf template
+//	 }
+	
+	
+	@GetMapping("/UploadMaterial")
+	public String ShowUploadMaterial(Model model)
+	{
+		if(session.getAttribute("loggedInAdmin") == null) {
+			return "redirect:/Login";
+		}
+		return "Admin/UploadMaterial";
+		
+	}
+
+
+	 
+	
+
+	
+	
 
 
 	
@@ -191,21 +238,24 @@ public class AdminController {
 	     }
 	 }
 	
-	 
 
-	 
-	 
 	 @GetMapping("/ManageStudents")
 	 public String showManageStudents(Model model) {
-		 if (session.getAttribute("loggedInAdmin") == null) {
+	     if (session.getAttribute("loggedInAdmin") == null) {
 	         return "redirect:/login";
 	     }
-		 List<Users> student = (List<Users>) userRepo.findAllByRoleAndStatusAndStatus(UserRole.STUDENT, UserStatus.APPROVED, UserStatus.DISABLED);
-		 model.addAttribute("student", student);
-		 return "Admin/ManageStudents";
-		 
+	     List<Users> students = userRepo.findAllByRoleAndStatusOrStatus(
+	             UserRole.STUDENT,
+	             UserStatus.APPROVED,
+	             UserStatus.DISABLED
+	     );
+	     model.addAttribute("student", students);
+	     return "Admin/ManageStudents";
 	 }
+	 
 
+	 
+	 
 
 	
 }

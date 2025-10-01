@@ -50,11 +50,17 @@
 											<td th:text="${student.year}">Year</td>
 											<td th:text="${#temporals.format(student.regDate, 'dd-MM-yyyy HH:mm')}">Reg Date</td>
 											<td>
-												<a th:if="${student.paymentImage != null}"
-												   th:href="@{'/paymentSlip/' + ${student.paymentImage}}"
-												   th:text="${student.paymentImage}"></a>
-												<span th:if="${student.paymentImage == null}">No Records</span>
-											</td>
+    <!-- Agar payment image exist karta hai -->
+    <a th:if="${student.paymentImage != null}" 
+       th:href="@{'/downloadPaymentImage/' + ${student.id}}" 
+       class="btn btn-primary btn-sm">
+       View / Download
+    </a>
+
+    <!-- Agar image nahi hai -->
+    <span th:if="${student.paymentImage == null}">No Records</span>
+</td>
+
 											<td th:text="${student.utrNo == null ? 'No Records' : student.utrNo}">UTR No.</td>
 											<td>
 												<a th:href="@{ApproveStudent(id = ${student.id})}" onclick="return confirm('Are You sure want to approve?')" class="btn btn-warning btn-sm">Pending</a>

@@ -18,6 +18,12 @@ public interface UsersRepository  extends JpaRepository<Users, Long>{
 
 	List<Users> findAllByRoleAndStatus(UserRole student, UserStatus pending);
 
-	Users findAllByRoleAndStatusAndStatus(UserRole student, UserStatus approved, UserStatus disabled);
+	boolean existsByRollNo(String userId);
+
+	Users findByRollNo(String userId);
+
+	List<Users> findAllByRoleAndStatusOrStatus(UserRole student, UserStatus approved, UserStatus disabled);
+
+	
 
 }
