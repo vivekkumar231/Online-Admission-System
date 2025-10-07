@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{Student/Studentbase::layout(~{::main})}">
+<head>
+    <title>Study Material | OAS Bio-Tech</title>
+</head>
+<body>
+<main th:fragment="main">
+    <div class="container-fluid mt-4">
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary">📘 Study Materials</h2>
+            <span th:text="'Welcome, ' + ${student.name}" class="text-secondary fw-bold"></span>
+        </div>
+
+        <!-- Search / Filter (Optional) -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Search by title..." id="searchInput" onkeyup="filterTable()">
+            </div>
+        </div>
+
+        <!-- Study Material Table -->
+        <div class="table-responsive shadow-sm rounded bg-white">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Uploaded By</th>
+                        <th scope="col">Upload Date</th>
+                        <th scope="col">Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="mat : ${studyMaterials}">
+                        <td th:text="${mat.title}">Title</td>
+                        <td th:text="${mat.uploadedBy}">Teacher</td>
+                        <td th:text="${#dates.format(mat.uploadDate, 'dd MMM yyyy')}">01 Jan 2025</td>
+                        <td>
+                            <a th:href="@{${mat.filePath}}" class="btn btn-sm btn-success">
+                                <i class="bi bi-download"></i> Download
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${studyMaterials.size() == 0}">
+                        <td colspan="4" class="text-center text-muted">No study materials available.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Custom Styles -->
+    <style>
+        h2.text-primary {
+            color: #1A5276; /* Bio-Tech Blue */
+        }
+        .table-hover tbody tr:hover {
+            background-color: #E0F2F1;
+        }
+        .btn-success {
+            background-color: #0B8A6A;
+            border-color: #0B8A6A;
+        }
+        .btn-success:hover {
+            background-color: #144d42;
+            border-color: #144d42;
+        }
+        #searchInput {
+            border-radius: 25px;
+            padding: 10px 15px;
+        }
+    </style>
+
+    <!-- Optional JS for search -->
+    <script>
+        function filterTable() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let table = document.querySelector("table tbody");
+            let rows = table.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                let titleCell = rows[i].getElementsByTagName("td")[0];
+                if (titleCell) {
+                    let textValue = titleCell.textContent || titleCell.innerText;
+                    rows[i].style.display = textValue.toLowerCase().indexOf(input) > -1 ? "" : "none";
+                }
+            }
+        }
+    </script>
+</main>
+</body>
+</html>

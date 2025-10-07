@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{Student/Studentbase::layout(~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | OAS Bio-Tech</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #e8f0fe;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .profile-card {
+            width: 100%;
+            max-width: 520px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            padding: 60px 30px 30px 30px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #0d6efd;
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+        }
+
+        .profile-card h2 {
+            color: #0d6efd;
+            margin-top: 70px; /* space for image */
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 26px;
+        }
+
+        .profile-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .profile-item i {
+            color: #0d6efd;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .profile-item:hover {
+            background-color: #f1f5ff;
+        }
+
+        .btn-edit {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, #0d6efd, #0b5ed7);
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            margin-top: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-edit:hover {
+            background: linear-gradient(90deg, #0b5ed7, #084298);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+    </style>
+</head>
+<body>
+<main th:fragment="main">
+    <div class="profile-card">
+        <!-- Profile Image -->
+        <img src="https://via.placeholder.com/120" alt="Profile Image" class="profile-image">
+
+        <h2><i class="bi bi-person-circle"></i> My Profile</h2>
+
+        <div class="profile-item">
+            <i class="bi bi-person-fill"></i>
+            <strong>Name:</strong>&nbsp;<span th:text="${student.name}">John Doe</span>
+        </div>
+        <div class="profile-item">
+            <i class="bi bi-envelope-fill"></i>
+            <strong>Email:</strong>&nbsp;<span th:text="${student.email}">john@example.com</span>
+        </div>
+        <div class="profile-item">
+            <i class="bi bi-mortarboard-fill"></i>
+            <strong>Program:</strong>&nbsp;<span th:text="${student.program}">B.Tech Data Science</span>
+        </div>
+        <div class="profile-item">
+            <i class="bi bi-building"></i>
+            <strong>Branch:</strong>&nbsp;<span th:text="${student.branch}">Computer Science</span>
+        </div>
+        <div class="profile-item">
+            <i class="bi bi-calendar-fill"></i>
+            <strong>Year:</strong>&nbsp;<span th:text="${student.year}">3rd Year</span>
+        </div>
+
+        <a href="#" class="btn-edit"><i class="bi bi-pencil-square"></i> Edit Profile</a>
+    </div>
+</main>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

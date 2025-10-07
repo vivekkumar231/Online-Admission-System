@@ -1,5 +1,10 @@
 package com.myproject.OAS.Controller;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,10 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myproject.OAS.Model.Enquiry;
+import com.myproject.OAS.Model.StudyMaterial;
 import com.myproject.OAS.Model.Users;
 import com.myproject.OAS.Model.Users.UserRole;
 import com.myproject.OAS.Model.Users.UserStatus;
 import com.myproject.OAS.Repository.EnquiryRepository;
+import com.myproject.OAS.Repository.StudyMaterialRepository;
 import com.myproject.OAS.Repository.UsersRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +45,9 @@ public class AdminController {
 	@Autowired
 	private EnquiryRepository enquiryRepo;
 	
+	@Autowired
+	private StudyMaterialRepository materialRepo;
+	 
 	@GetMapping("/Dashboard")
 	public String showDashobard() 
 	{
@@ -139,14 +149,57 @@ public class AdminController {
 	
 	
 	@GetMapping("/UploadMaterial")
-	public String ShowUploadMaterial(Model model)
-	{
-		if(session.getAttribute("loggedInAdmin") == null) {
-			return "redirect:/Login";
-		}
-		return "Admin/UploadMaterial";
-		
+	public String ShowUploadMaterial(Model model) {
+	    // Admin session check
+	    if(session.getAttribute("loggedInAdmin") == null) {
+	        return "redirect:/login";
+	    }
+	    
+	    model.addAttribute("material", new StudyMaterial());
+	    return "Admin/UploadMaterial";
 	}
+
+	@PostMapping("/UploadMaterial")
+	public String UploadMaterial(@ModelAttribute("material") StudyMaterial material,
+	                             @RequestParam("file") MultipartFile file,
+	                             RedirectAttributes attributes) {
+	    try {
+	        // File storage name with timestamp
+	        String storageFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+
+	        // Safer upload directory
+	        String uploadDir = "uploads/StudyMaterial/";
+	        Path uploadPath = Paths.get(uploadDir);
+
+	        if(!Files.exists(uploadPath)){
+	            Files.createDirectories(uploadPath);
+	        }
+
+	        // Save file
+	        try(InputStream inputStream = file.getInputStream()){
+	            Files.copy(inputStream, uploadPath.resolve(storageFileName), StandardCopyOption.REPLACE_EXISTING);
+	        }
+
+	        // Set entity data
+	        material.setFileUrl(storageFileName);
+	        material.setUploadedDate(LocalDateTime.now());
+
+	        // Save to database
+	        materialRepo.save(material);
+
+	        // Success message
+	        attributes.addFlashAttribute("msg", material.getMaterialType().name() + " uploaded successfully!");
+	        return "redirect:/Admin/UploadMaterial";
+
+	    } catch (Exception e) {
+	        e.printStackTrace(); // For debugging
+	        attributes.addFlashAttribute("msg", "Error: " + e.getMessage());
+	        return "redirect:/Admin/UploadMaterial";
+	    }
+	}
+
+	
+	
 
 
 	 

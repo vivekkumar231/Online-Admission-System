@@ -1,10 +1,104 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{Student/Studentbase::layout(~{::main})}">
 <head>
-    <meta charset="UTF-8">
-    <title>Student Dashboard</title>
+    <title>Dashboard | OAS Bio-Tech</title>
 </head>
 <body>
-    <h1>Welcome to Student Dashboard</h1>
+<main th:fragment="main">
+    <div class="container-fluid mt-4">
+        <!-- Welcome Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary">
+                👋 Welcome, 
+                <span th:text="${loggedInStudent != null ? loggedInStudent.name : 'Student'}">Student</span>!
+            </h2>
+            <small class="text-muted">Bio-Tech Student Dashboard</small>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="row g-4">
+            <!-- Total Study Materials Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 h-100" style="background-color: #1A5276; color: #fff;">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="bi bi-journal-bookmark-fill fs-2"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Total Study Materials</h6>
+                            <h2 class="fw-bold" th:text="${studymaterial}">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Assignments Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 h-100" style="background-color: #0B8A6A; color: #fff;">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="bi bi-pencil-square fs-2"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Total Assignments</h6>
+                            <h2 class="fw-bold" th:text="${assignments}">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 h-100" style="background-color: #144d42; color: #fff;">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="bi bi-bar-chart-line-fill fs-2"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Performance</h6>
+                            <h2 class="fw-bold">N/A</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Courses Card -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 rounded-4 p-3 h-100" style="background-color: #00C292; color: #fff;">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="bi bi-people-fill fs-2"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Active Courses</h6>
+                            <h2 class="fw-bold">N/A</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Styles -->
+    <style>
+        h2.text-primary {
+            color: #1A5276; /* Deep Bio-Tech Blue */
+        }
+        .card h6 {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+        .card h2 {
+            font-size: 2rem;
+        }
+        .card i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</main>
 </body>
 </html>
