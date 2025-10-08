@@ -288,6 +288,22 @@ public String updateRegistration(HttpServletRequest request,
 	 
 
 	
+  @GetMapping("/Park")
+  public String showPark() {
+	  return "/ThePark";
+  }
+  
+  
+  @GetMapping("/Facilities")
+  public String showFacilities() {
+	  return "/Facilities";
+  }
+  
+
+  @GetMapping("/news-events")
+  public String showNewsEvents() {
+      return "NewsEvents"; // File name in templates folder (without .html)
+  }
 
 
 	

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::main})}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bio-Tech Park - News & Events</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(90deg, #6dd5ed, #2193b0);
+      color: white;
+      padding: 70px 25px;
+      text-align: center;
+      border-radius: 12px;
+      margin-bottom: 60px;
+    }
+    .hero-section h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .hero-section p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    /* News Cards */
+    .news-card {
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background-color: #fff;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .news-img-wrapper {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+    .news-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.4s ease;
+    }
+    .news-card:hover .news-img-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .news-body {
+      flex-grow: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .news-title {
+      color: #0d6efd;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+    .news-desc {
+      color: #555;
+      font-size: 0.95rem;
+      flex-grow: 1;
+      text-align: justify;
+    }
+    .read-more {
+      background: linear-gradient(90deg, #2193b0, #6dd5ed);
+      border: none;
+      color: white;
+      font-size: 14px;
+      padding: 8px 20px;
+      border-radius: 25px;
+      transition: 0.3s ease;
+      margin-top: 15px;
+      align-self: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .read-more:hover {
+      transform: scale(1.07);
+      background: linear-gradient(90deg, #6dd5ed, #2193b0);
+    }
+
+    /* Conference Section */
+    .conference-section {
+      margin-top: 80px;
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .conference-section img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .conference-content {
+      padding: 40px 30px;
+    }
+    .conference-content h2 {
+      color: #0d6efd;
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+    .conference-content p {
+      font-size: 1.05rem;
+      color: #555;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      margin-top: 60px;
+      border-top: 3px solid #2193b0;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .conference-section img {
+        height: 250px;
+      }
+      .conference-content {
+        padding: 25px;
+      }
+      .hero-section {
+        padding: 50px 15px;
+      }
+      .hero-section h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container my-5">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>Latest News & Upcoming Events</h1>
+      <p>Stay updated with the latest innovations, research breakthroughs, and academic events at Bio-Tech Park — where science meets innovation.</p>
+    </section>
+
+    <!-- News Cards -->
+    <div class="row g-4">
+      <div class="col-md-4 d-flex">
+        <div class="news-card w-100">
+          <div class="news-img-wrapper">
+            <img src="images/news1.jpg" alt="New Research Lab Opened">
+          </div>
+          <div class="news-body">
+            <h5 class="news-title">New Research Lab Opened</h5>
+            <p class="news-desc">Bio-Tech Park inaugurated a next-generation laboratory for molecular and microbial research, fostering world-class experimentation and student innovation.</p>
+            <button class="read-more">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex">
+        <div class="news-card w-100">
+          <div class="news-img-wrapper">
+            <img src="images/news2.jpg" alt="International Workshop">
+          </div>
+          <div class="news-body">
+            <h5 class="news-title">International Workshop</h5>
+            <p class="news-desc">A global workshop was organized focusing on microbial biotechnology, sustainable practices, and bioproduct innovation with international experts.</p>
+            <button class="read-more">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex">
+        <div class="news-card w-100">
+          <div class="news-img-wrapper">
+            <img src="images/news4.jpg" alt="Annual Biotechnology Seminar">
+          </div>
+          <div class="news-body">
+            <h5 class="news-title">Annual Biotechnology Seminar</h5>
+            <p class="news-desc">Renowned scientists shared insights into biotechnology’s future trends, including bioinformatics, genetic editing, and innovation in healthcare.</p>
+            <button class="read-more">Read More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conference Section -->
+    <section class="conference-section mt-5">
+      <img src="images/conference.jpg" alt="Global Biotechnology Conference">
+      <div class="conference-content">
+        <h2>Global Biotechnology Conference Call 2025</h2>
+        <p>Join the international Bio-Tech Park Conference 2025, bringing together global researchers, entrepreneurs, and innovators to discuss breakthroughs in genetic engineering, sustainability, and bioprocess technology.</p>
+        <p>The conference includes keynote lectures by eminent scientists, panel discussions on bioethics, and live Q&A sessions. A must-attend for biotech professionals and students seeking innovation and collaboration.</p>
+        <p><strong>Date:</strong> November 20, 2025 &nbsp; | &nbsp; <strong>Mode:</strong> Online (Zoom)</p>
+        <p><strong>Registration:</strong> Open for all biotechnology enthusiasts, students, and professionals.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Bio-Tech Park. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

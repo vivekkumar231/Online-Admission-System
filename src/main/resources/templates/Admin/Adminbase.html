@@ -3,12 +3,9 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>Admin Zone - OAS</title>
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-	name='viewport' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 <!--Data Table CSS  -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
@@ -25,13 +22,78 @@
 	td, th{
  		white-space: nowrap !important;
  	}
+
+	/* Bio-Tech inspired professional theme */
+	.main-header {
+		background-color: #007b8f; /* teal-blue header */
+		color: #ffffff;
+	}
+	.logo-header a.logo {
+		color: #ffffff;
+		font-weight: 700;
+		font-size: 1.5rem;
+	}
+	.navbar-header {
+		background-color: #009faf !important; /* lighter teal topbar */
+	}
+
+	.sidebar {
+		background-color: #e0f7fa; /* very light cyan */
+	}
+	.nav-item a {
+		color: #007b8f !important; /* dark teal links */
+		font-weight: 500;
+	}
+	.nav-item a:hover {
+		background-color: #b2ebf2 !important; /* soft hover cyan */
+		border-radius: 5px;
+	}
+	.nav-item .active a {
+		background-color: #80deea !important; /* active link */
+		color: #004d52 !important;
+		border-radius: 5px;
+	}
+
+	.content {
+		background-color: #f4f9f9; /* very light background for dashboard content */
+		padding: 20px;
+	}
+
+	.card {
+		background-color: #ffffff; /* white card */
+		border-radius: 10px;
+		box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+		margin-bottom: 20px;
+	}
+
+	.footer {
+		background-color: #009faf; /* teal footer */
+		color: #ffffff;
+		padding: 15px 0;
+	}
+
+	.footer a {
+		color: #e0f7fa;
+		text-decoration: none;
+	}
+
+	.dropdown-menu.dropdown-user {
+		background-color: #f0f8ff; /* light azure for dropdown */
+	}
+	.dropdown-menu.dropdown-user a {
+		color: #007b8f;
+	}
+	.dropdown-menu.dropdown-user a:hover {
+		background-color: #b2ebf2;
+	}
 </style>
+
 </head>
 <body>
 	<div class="wrapper">
 		<div class="main-header">
 			<div class="logo-header text-center">
-				<a href="/" class="logo">OAS</a>
+				<a href="/" class="logo text-primary fw-bold">OAS</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button"
 					data-toggle="collapse" data-target="collapse"
 					aria-controls="sidebar" aria-expanded="false"
@@ -44,37 +106,21 @@
 			</div>
 			<nav class="navbar navbar-header navbar-expand-lg">
 				<div class="container-fluid">
-
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-						
-						
 						<li class="nav-item dropdown">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> 
-							<!-- <img th:if="${session.loggedInAdmin.profilePic != null}" th:src="@{'/ProfilePic/'+${session.loggedInAdmin.profilePic}}" alt="user-img" width="36" class="img-circle">
-							<img th:if="${session.loggedInAdmin.profilePic == null}" src="../assets/img/profile2.jpg" alt="user-img" width="36" class="img-circle">
-							 -->
 							<span th:text="${session.loggedInAdmin.name}"></span>
 						</a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
-										<!-- <div class="u-img">
-											<img th:if="${session.loggedInAdmin.profilePic != null}" th:src="@{'/ProfilePic/'+${session.loggedInAdmin.profilePic}}" alt="user">
-											<img th:if="${session.loggedInAdmin.profilePic == null}" src="../assets/img/profile2.jpg" alt="user">
-										</div>
-										 --><div class="u-text">
+										<div class="u-text">
 											<h4 th:text="${session.loggedInAdmin.name}"></h4>
 											<p class="text-muted" th:text="${session.loggedInAdmin.email}">business@Agritrade.in</p>
 											<a href="ViewProfile" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
 										</div>
 									</div>
 								</li>
-								<!-- <div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="EditProfile">
-									<i class="ti-user"></i> 
-									Update Profile Pic
-								</a> -->
-								
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="ChangePassword">
 								<i class="ti-settings"></i>
@@ -82,24 +128,21 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/logout">
 								<i class="fa fa-power-off"></i> Logout</a>
-							</ul> <!-- /.dropdown-user --></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</nav>
 		</div>
+		
 		<div class="sidebar">
 			<div class="scrollbar-inner sidebar-wrapper">
 				<div class="user">
-					<!-- <div class="photo">
-						<img th:if="${session.loggedInAdmin.profilePic !=null}" th:src="@{'/ProfilePic/'+${session.loggedInAdmin.profilePic}}" src="../assets/img/profile.jpg" alt="user-img">
-						<img th:if="${session.loggedInAdmin.profilePic ==null}" src="../assets/img/profile2.jpg" alt="user-img">		
-					</div>
-					 --><div class="info">
+					<div class="info">
 						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true"> 
 						<span>
 							<span th:text="${session.loggedInAdmin.name}"></span> 
 							<span class="user-level">Administrator</span>
-								<!-- <span class="caret"></span> -->
 						</span>
 						</a>
 					</div>
@@ -116,41 +159,32 @@
 						<a class="nav-link" href="NewStudents" > 
 							<i class="la la-user-plus"></i>
 							<p style="white-space: nowrap;">New Students</p>
-							<span class="badge" style="font-size: 18px;"></span>
 						</a>
 					</li>
-					
 					<li class="nav-item" th:classappend="${active3}">
 						<a class="nav-link" href="ManageStudents" > 
 							<i class="la la-user-plus"></i>
 							<p>Manage Students</p>
-							<span class="badge" style="font-size: 18px;"></span>
 						</a>
 					</li>
-					
-					
 					 <li class="nav-item" th:classappend="${active5}">
 						<a href="AddStudent"> 
 							<i class="la la-bell"></i>
 							<p>Add Student</p> 
 						</a>
 					</li>
-					
 					<li class="nav-item" th:classappend="${active6}">
 						<a href="UploadMaterial"> 
 							<i class="la la-bullhorn"></i>
 							<p>Upload Study Material</p> 
 						</a>
 					</li>
-					
 					<li class="nav-item" th:classappend="${active6}">
 						<a href="Enquiry"> 
 							<i class="la la-bullhorn"></i>
 							<p>Enquiries</p> 
-							<!-- <span class="badge badge-success">3</span> -->
 						</a>
 					</li>
-					
 					<li class="nav-item py-4">
 						&nbsp;
 					</li>
@@ -166,18 +200,13 @@
 				<div class="container-fluid">
 					<nav class="pull-left">
 						<ul class="nav">
-							<li class="nav-item"><a class="nav-link"
-								href="dashboard"> Dashboard </a></li>
-							<li class="nav-item"><a class="nav-link" href="#"> Help
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href=""> Licenses </a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="dashboard"> Dashboard </a></li>
+							<li class="nav-item"><a class="nav-link" href="#"> Help </a></li>
+							<li class="nav-item"><a class="nav-link" href=""> Licenses </a></li>
 						</ul>
 					</nav>
 					<div class="copyright ml-auto">
-						2025, made with <i class="la la-heart heart text-danger"></i> by <a
-							href="https://www.instagram.com/lucky_agency_4149" target="_blank">Vivek Kumar</a>
+						2025, made with <i class="la la-heart heart text-danger"></i> by <a href="https://www.instagram.com/lucky_agency_4149" target="_blank">Vivek Kumar</a>
 					</div>
 				</div>
 			</footer>
@@ -211,32 +240,30 @@
 <script src="../assets/js/ready.min.js"></script>
 <script src="../assets/js/demo.js"></script>
 
-
 <!-- Data table js -->
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
-	
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+
 <script th:inline="javascript">
     $(document).ready(function () {
         $('#example').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pageLength' //, 'pdf', 'print'
+                'copy', 'csv', 'excel', 'pageLength'
             ],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
-                ['10', '25', '50', '100', 'All'] // <-- Capitalized 'All'
+                ['10', '25', '50', '100', 'All']
             ]
         });
     });
 </script>
-
 
 <!-- Modal for displaying the current image from table-->
 <div class="modal fade" style="left: 50; top: 40;" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -255,31 +282,23 @@
   </div>
 </div>
 
-
 <!-- JavaScript to open the modal and set the image -->
-	<script>
-	  // Select all profile images with the class 'profile-img'
-	  var profileImages = document.querySelectorAll('.profile-img'); 
+<script>
+  var profileImages = document.querySelectorAll('.profile-img'); 
+  var modalImage = document.getElementById('modalImage');
+  var imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+  if (profileImages.length > 0) {
+    profileImages.forEach(function(profileImage) {
+      profileImage.addEventListener('click', function() {
+        var imgSrc = profileImage.getAttribute('src');
+        modalImage.setAttribute('src', imgSrc);
+        imageModal.show();
+      });
+    });
+  } else {
+    console.error('No profile images found.');
+  }
+</script>
 
-	  // Modal elements
-	  var modalImage = document.getElementById('modalImage');
-	  var imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
-
-	  // Ensure that profileImages is not empty
-	  if (profileImages.length > 0) {
-	    profileImages.forEach(function(profileImage) {
-	      // Add click event to each profile image
-	      profileImage.addEventListener('click', function() {
-	        var imgSrc = profileImage.getAttribute('src'); // Get the source of the clicked image
-	        modalImage.setAttribute('src', imgSrc); // Set the source of the image in the modal
-	        imageModal.show(); // Show the modal manually
-	      });
-	    });
-	  } else {
-	    console.error('No profile images found.');
-	  }
-
-	</script>
 </body>
-
 </html>

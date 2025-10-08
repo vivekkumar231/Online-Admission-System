@@ -141,19 +141,19 @@
         <ul class="navbar-nav ml-auto align-items-center">
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-                    👤 <span th:text="${loggedInStudent != null ? loggedInStudent.name : 'Student Name'}">Student Name</span>
+                    👤 <span th:text="${session.loggedInStudent != null ? session.loggedInStudent.name : 'Student Name'}">Student Name</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
                         <div class="user-box text-center">
-                            <h5 th:text="${loggedInStudent != null ? loggedInStudent.name : 'Student Name'}">Student Name</h5>
-                            <p class="text-muted" th:text="${loggedInStudent != null ? loggedInStudent.email : 'email@example.com'}">email@example.com</p>
+                            <h5 th:text="${session.loggedInStudent != null ? session.loggedInStudent.name : 'Student Name'}">Student Name</h5>
+                            <p class="text-muted" th:text="${session.loggedInStudent != null ? session.loggedInStudent.email : 'email@example.com'}">email@example.com</p>
                         </div>
                     </li>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" th:href="@{/Student/ChangePassword}">Change Password</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" th:href="@{/Logout}">Logout</a>
+                    <a class="dropdown-item text-danger" th:href="@{/logout}">Logout</a>
                 </ul>
             </li>
         </ul>
@@ -166,7 +166,7 @@
         <div class="scrollbar-inner sidebar-wrapper">
             <div class="user mb-4">
                 <div class="info">
-                    <span th:text="${loggedInStudent != null ? loggedInStudent.name : 'Student Name'}">Student Name</span>
+                    <span th:text="${session.loggedInStudent != null ? session.loggedInStudent.name : 'Student Name'}">Student Name</span>
                     <div class="user-level">Bio-Tech Student</div>
                 </div>
             </div>

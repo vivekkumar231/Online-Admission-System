@@ -4,125 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Registration</title>
-    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <main class="container my-5">
-<!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <div class="card shadow-lg p-4">
-        <h1 class="text-center mb-4 text-primary">Student Registration Page</h1>
+        <h1 class="text-center mb-4 text-primary">Student Registration</h1>
 
-        <form  method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
 
+            <!-- Student Info -->
             <div class="row g-3">
-
-                <!-- Roll No -->
                 <div class="col-md-6">
                     <label class="form-label">Roll No:</label>
-                    <input type="text" class="form-control" name="rollNo" th:value="${student.rollNo}" readonly/>
+                    <input type="text" class="form-control form-control-sm" name="rollNo" th:value="${student.rollNo}" readonly/>
                 </div>
-
-                <!-- Name -->
                 <div class="col-md-6">
                     <label class="form-label">Name:</label>
-                    <input type="text" class="form-control" name="name" th:value="${student.name}" readonly/>
+                    <input type="text" class="form-control form-control-sm" name="name" th:value="${student.name}" readonly/>
                 </div>
-
-                <!-- Father Name -->
                 <div class="col-md-6">
                     <label class="form-label">Father Name:</label>
-                    <input type="text" class="form-control" name="fatherName" th:value="${student.fatherName}"/>
+                    <input type="text" class="form-control form-control-sm" name="fatherName" th:value="${student.fatherName}"/>
                 </div>
-
-                <!-- Mother Name -->
                 <div class="col-md-6">
                     <label class="form-label">Mother Name:</label>
-                    <input type="text" class="form-control" name="motherName" th:value="${student.motherName}"/>
+                    <input type="text" class="form-control form-control-sm" name="motherName" th:value="${student.motherName}"/>
                 </div>
-
-                <!-- Gender -->
                 <div class="col-md-6">
                     <label class="form-label">Gender:</label>
-                    <input type="text" class="form-control" name="gender" th:value="${student.gender}"/>
+                    <input type="text" class="form-control form-control-sm" name="gender" th:value="${student.gender}"/>
                 </div>
-
-                <!-- Address -->
                 <div class="col-md-6">
                     <label class="form-label">Address:</label>
-                    <input type="text" class="form-control" name="address" th:value="${student.address}"/>
+                    <input type="text" class="form-control form-control-sm" name="address" th:value="${student.address}"/>
                 </div>
-
-                <!-- Program -->
                 <div class="col-md-6">
                     <label class="form-label">Program:</label>
-                    <input type="text" class="form-control" name="program" th:value="${student.program}" readonly/>
+                    <input type="text" class="form-control form-control-sm" name="program" th:value="${student.program}" readonly/>
                 </div>
-
-                <!-- Branch -->
                 <div class="col-md-6">
                     <label class="form-label">Branch:</label>
-                    <input type="text" class="form-control" name="branch" th:value="${student.branch}" readonly/>
+                    <input type="text" class="form-control form-control-sm" name="branch" th:value="${student.branch}" readonly/>
                 </div>
-
-                <!-- Year -->
                 <div class="col-md-6">
                     <label class="form-label">Year:</label>
-                    <input type="text" class="form-control" name="year" th:value="${student.year}" readonly/>
+                    <input type="text" class="form-control form-control-sm" name="year" th:value="${student.year}" readonly/>
                 </div>
-
-                <!-- Contact No -->
                 <div class="col-md-6">
                     <label class="form-label">Contact No:</label>
-                    <input type="text" class="form-control" name="contactNo" th:value="${student.contactNo}" readonly/>
+                    <input type="text" class="form-control form-control-sm" name="contactNo" th:value="${student.contactNo}" readonly/>
                 </div>
-
-                <!-- Email -->
                 <div class="col-md-6">
                     <label class="form-label">Email:</label>
-                    <input type="email" class="form-control" name="email" th:value="${student.email}" readonly/>
+                    <input type="email" class="form-control form-control-sm" name="email" th:value="${student.email}" readonly/>
                 </div>
-
-                <!-- UTR No -->
                 <div class="col-md-6">
                     <label class="form-label">UTR No:</label>
-                    <input type="text" class="form-control" name="utrNo" th:value="${student.utrNo}"/>
+                    <input type="text" class="form-control form-control-sm" name="utrNo" th:value="${student.utrNo}"/>
                 </div>
-
-                <!-- Payment Image -->
                 <div class="col-md-6">
                     <label class="form-label">Upload Payment Image:</label>
-                    <input type="file" class="form-control" name="paymentImage"/>
+                    <input type="file" class="form-control form-control-sm" name="paymentImage"/>
                 </div>
-
             </div>
 
-            <!-- Already uploaded payment image -->
+            <!-- Already uploaded image -->
             <div class="mt-3" th:if="${student.paymentImage != null}">
                 <p><b>Uploaded Payment Image:</b></p>
-                <img th:src="@{${student.paymentImage}}" width="200" class="border rounded shadow-sm"/>
+                <img th:src="@{${student.paymentImage}}" width="150" class="border rounded shadow-sm"/>
             </div>
 
-            <!-- Submit -->
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success px-4">Update Registration</button>
+            <!-- Payment Details -->
+            <div class=" p-3 mt-4">
+                <h4 class="text-center text-info mb-3">Payment Details</h4>
+                <div class="row align-items-center">
+                    <!-- QR Code -->
+                    <div class="col-md-6 text-center">
+                        <img src="data:image/jpeg;base64,..." width="150" class="shadow rounded mb-2"/>
+                        <p class="small text-muted">Scan QR Code</p>
+                    </div>
+                    <!-- Payment Amount -->
+                    <div class="col-md-6 text-center">
+                        <p class="fs-5">Total Payment</p>
+                        <h3 class="text-success">₹45,000</h3>
+                    </div>
+                </div>
             </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-sm px-4">Update Registration</button>
+            </div>
+
         </form>
     </div>
 
-    <!-- Payment Details Section -->
-    <div class="card shadow-lg p-4 mt-5">
-        <h2 class="text-center text-info">Payment Details</h2>
-        <p class="fs-5 text-center">Total Payment: <b>₹45,000</b></p>
-        <p class="text-center">Scan the QR code below to pay:</p>
-        <div class="text-center">
-            <img src="data:image/jpeg;base64, ... " width="200" class="shadow rounded"/>
-        </div>
-    </div>
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </main>
-
-
 </body>
 </html>

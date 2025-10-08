@@ -1,8 +1,94 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:replace="~{Admin/Adminbase::layout(~{::main})}">
- 	<head>
- 		<main>
- 			<h1>This is Dashboard page </h1>
- 		</main>
- 	</head>
+  <head>
+    <main>
+      <!-- Dashboard Container -->
+      <div class="container-fluid p-4" style="background-color: #f8f9fa; min-height: 100vh;">
+
+        <!-- Dashboard Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="fw-bold text-primary">Admin Dashboard</h1>
+          <span class="text-muted">Welcome back, Admin!</span>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-4">
+          
+          <!-- Users Card -->
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3" style="background-color: #e3f2fd;">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Users</h5>
+                <p class="display-6 fw-bold">1,245</p>
+                <p class="text-success">+5% this month</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projects Card -->
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3" style="background-color: #fff3e0;">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Projects</h5>
+                <p class="display-6 fw-bold">87</p>
+                <p class="text-success">+8% this month</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Revenue Card -->
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3" style="background-color: #e8f5e9;">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Revenue</h5>
+                <p class="display-6 fw-bold">$12,450</p>
+                <p class="text-danger">-2% this month</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notifications Card -->
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3" style="background-color: #f3e5f5;">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Notifications</h5>
+                <p class="display-6 fw-bold">23</p>
+                <p class="text-warning">New updates</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mt-5 g-4">
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 text-center py-4" style="background-color: #f0f4c3;">
+              <h5 class="fw-bold">Add User</h5>
+              <i class="bi bi-person-plus display-4 text-success"></i>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 text-center py-4" style="background-color: #ffe0b2;">
+              <h5 class="fw-bold">New Project</h5>
+              <i class="bi bi-folder-plus display-4 text-primary"></i>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 text-center py-4" style="background-color: #d1c4e9;">
+              <h5 class="fw-bold">Reports</h5>
+              <i class="bi bi-file-bar-graph display-4 text-warning"></i>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-3 text-center py-4" style="background-color: #c8e6c9;">
+              <h5 class="fw-bold">Settings</h5>
+              <i class="bi bi-gear display-4 text-danger"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </head>
 </html>

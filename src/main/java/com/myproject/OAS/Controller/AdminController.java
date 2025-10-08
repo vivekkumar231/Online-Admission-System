@@ -1,5 +1,6 @@
 package com.myproject.OAS.Controller;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -136,7 +137,7 @@ public class AdminController {
 	    } catch (Exception e) {
 	        attr.addFlashAttribute("msg", "Error approving student " + e.getMessage());
 	    }
-	    return "redirect:/Admin/ManageStudents";  // better to redirect back to student list
+	    return "redirect:/Admin/NewStudents";  // better to redirect back to student list
 	}
 	
 //	@GetMapping("/UploadMaterial")
@@ -148,56 +149,64 @@ public class AdminController {
 //	 }
 	
 	
-	@GetMapping("/UploadMaterial")
-	public String ShowUploadMaterial(Model model) {
-	    // Admin session check
-	    if(session.getAttribute("loggedInAdmin") == null) {
-	        return "redirect:/login";
-	    }
-	    
-	    model.addAttribute("material", new StudyMaterial());
-	    return "Admin/UploadMaterial";
-	}
 
-	@PostMapping("/UploadMaterial")
-	public String UploadMaterial(@ModelAttribute("material") StudyMaterial material,
-	                             @RequestParam("file") MultipartFile file,
-	                             RedirectAttributes attributes) {
-	    try {
-	        // File storage name with timestamp
-	        String storageFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+    @GetMapping("/UploadMaterial")
+    public String showUploadMaterial(Model model) {
+        // ✅ Admin session check
+        if (session.getAttribute("loggedInAdmin") == null) {
+            return "redirect:/login";
+        }
 
-	        // Safer upload directory
-	        String uploadDir = "uploads/StudyMaterial/";
-	        Path uploadPath = Paths.get(uploadDir);
+        model.addAttribute("material", new StudyMaterial());
+        return "Admin/UploadMaterial";
+    }
 
-	        if(!Files.exists(uploadPath)){
-	            Files.createDirectories(uploadPath);
-	        }
+    @PostMapping("/UploadMaterial")
+    public String uploadMaterial(@ModelAttribute("material") StudyMaterial material,
+                                 @RequestParam("file") MultipartFile file,
+                                 RedirectAttributes attributes) {
 
-	        // Save file
-	        try(InputStream inputStream = file.getInputStream()){
-	            Files.copy(inputStream, uploadPath.resolve(storageFileName), StandardCopyOption.REPLACE_EXISTING);
-	        }
+        try {
+            // ✅ Check if file is empty
+            if (file.isEmpty()) {
+                attributes.addFlashAttribute("msg", "Please select a file to upload.");
+                return "redirect:/Admin/UploadMaterial";
+            }
 
-	        // Set entity data
-	        material.setFileUrl(storageFileName);
-	        material.setUploadedDate(LocalDateTime.now());
+            // ✅ Unique file name
+            String storageFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
-	        // Save to database
-	        materialRepo.save(material);
+            // ✅ Directory setup
+            String uploadDir = "uploads/StudyMaterial/";
+            Path uploadPath = Paths.get(uploadDir);
 
-	        // Success message
-	        attributes.addFlashAttribute("msg", material.getMaterialType().name() + " uploaded successfully!");
-	        return "redirect:/Admin/UploadMaterial";
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
 
-	    } catch (Exception e) {
-	        e.printStackTrace(); // For debugging
-	        attributes.addFlashAttribute("msg", "Error: " + e.getMessage());
-	        return "redirect:/Admin/UploadMaterial";
-	    }
-	}
+            // ✅ Save file
+            try (InputStream inputStream = file.getInputStream()) {
+                Files.copy(inputStream, uploadPath.resolve(storageFileName),
+                        StandardCopyOption.REPLACE_EXISTING);
+            }
 
+            // ✅ Set details to entity
+            material.setFileUrl(storageFileName);
+            material.setUploadedDate(LocalDateTime.now());
+
+            materialRepo.save(material);
+
+            // ✅ Success message
+            attributes.addFlashAttribute("msg",
+                    material.getMaterialType().name() + " uploaded successfully!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("msg", "Error uploading file: " + e.getMessage());
+        }
+
+        return "redirect:/Admin/UploadMaterial";
+    }
 	
 	
 
